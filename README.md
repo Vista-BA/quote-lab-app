@@ -1,9 +1,11 @@
-# 7-Eleven Quote Desk + Quote Lab — on a real vector database
+# 7-Eleven Quote Lab — on a real vector database
 
-Two pages, one database:
+One page at `/`, seven tabs: **Try a call**, **Vector search** (ranked by Postgres), **Rates and rules**, **Saved**, **Vector DB**, and two tabs taken from Quote Desk v4:
 
-- **`/` Quote Desk (v4):** the full prototype (Overview, Live demo with the five steps and their three views, Search old quotes, What the data says, Business case). Source in `desk/`, 74 tests in `desk/tests/`. Its **Search old quotes** tab is ranked by Postgres through `/api/search`; if the database does not answer it falls back to the same search in the browser and says so.
-- **`/lab` Quote Lab:** the playground (try your own call, add quotes, edit rates, save drafts, see a stored vector).
+- **What the data says:** the ClickUp study (589 work orders, $1.03M quoted, NTE overruns, loss jobs, who quotes, the search test), each number with how it was counted.
+- **Business case:** type the inputs (minutes per quote, hour cost, build and run cost) and the hours freed, money and payback follow. Unknowns stay "?".
+
+Source of the two tabs: `src/business.js`. Their figures come from `desk/data/data.json` (`study`) and the sums from `desk/src/lib/caseModel.js`, both covered by `desk/tests/`. The rest of `desk/` (the full Quote Desk v4 React app) is kept in the repo but not served.
 
 **Status: prototype.** Same Quote Lab page, but the quotes and their vectors live in **Postgres + pgvector** (Neon), and Postgres does the ranking. Not connected to Yoda, ClickUp or Quo.
 
@@ -39,9 +41,9 @@ Terminal alternative for step 6: `npm install` then `DATABASE_URL="<neon string>
 
 ```bash
 npm install
-npm run load    # into a local PGlite (Postgres + pgvector in WASM), folder .pgdata
+DATABASE_URL="pglite:./.pgdata" npm run load    # into a local PGlite (Postgres + pgvector in WASM)
 npm run dev     # http://localhost:3000
-npm test        # 74 Quote Desk tests + 9 API checks on a throwaway database
+npm test        # 74 Quote Desk tests (incl. the business case sums) + 9 API checks on a throwaway database
 ```
 Set `DATABASE_URL` to a Neon string to run the same commands against Neon.
 

@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "7-Eleven Quote Desk (v4) and Quote Lab on Postgres + pgvector (Neon), deployable to Vercel",
+  "description": "7-Eleven Quote Lab (with the data and business case from Quote Desk v4) on Postgres + pgvector (Neon), deployable to Vercel",
   "scripts": {
-    "build": "node desk/build.mjs && node scripts/build.mjs",
+    "build": "node scripts/build.mjs",
     "load": "node scripts/load.mjs",
     "dev": "node scripts/dev.mjs",
     "test": "node --test desk/tests/*.test.mjs && node scripts/test.mjs"

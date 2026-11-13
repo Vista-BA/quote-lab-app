@@ -1,4 +1,5 @@
-// Builds public/index.html from src/template.html (the Quote Lab page) + data/page_data.json (word vectors, rules, samples).
+// Builds public/index.html from src/template.html (the Quote Lab page) + data/page_data.json (word vectors, rules, samples),
+// plus the "What the data says" and "Business case" tabs from src/business.js.
 // The quotes themselves are NOT baked in: the page loads them from Postgres through /api/index.
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 const root = new URL("..", import.meta.url);
@@ -83,7 +84,57 @@ rep(`  $("#dbnote").textContent = st === "db" ?`, `  if (st === "db") { $("#dbno
 rep("Meaning search: a small free word-vector model, ${V.dim} numbers per quote, ${V.vocab.toLocaleString()} words, running in your browser.",
     "Vectors: a small free word-vector model, ${V.dim} numbers per quote, stored and ranked in Postgres + pgvector.");
 rep("<title>7-Eleven Quote Lab</title>", `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>7-Eleven Quote Lab</title>`);
+// 7. Two tabs from Quote Desk v4: "What the data says" and "Business case" (src/business.js).
+//    The study counts come from desk/data/data.json; the case sums reuse desk/src/lib/caseModel.js (tested by desk/tests).
+const study = JSON.parse(readFileSync(new URL("desk/data/data.json", root), "utf8")).study;
+const caseModel = readFileSync(new URL("desk/src/lib/caseModel.js", root), "utf8").replace(/^export /gm, "");
+const business = readFileSync(new URL("src/business.js", root), "utf8");
+rep(`<button class="tab" role="tab" id="tab-db" aria-selected="false">Vector DB</button>`, `<button class="tab" role="tab" id="tab-db" aria-selected="false">Vector DB</button>
+      <button class="tab" role="tab" id="tab-data" aria-selected="false">What the data says</button>
+      <button class="tab" role="tab" id="tab-case" aria-selected="false">Business case</button>`);
+rep(`  <footer id="foot"></footer>`, `  <section id="view-data" hidden></section>
+  <section id="view-case" hidden></section>
+
+  <footer id="foot"></footer>`);
+rep("</style>", `/* data + business case (from Quote Desk v4) */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:4px}
+.kpi .v{font:800 26px/1.1 var(--display);color:var(--accent)} .kpi .v.unknown{color:var(--mute)}
+.kpi .t{font-size:13.5px}
+details.fold{margin-bottom:10px;padding:0}
+details.fold>summary{cursor:pointer;padding:13px 16px;display:flex;flex-direction:column;gap:2px;font-weight:600}
+details.fold>summary::marker{color:var(--mute)}
+.fbody{padding:0 16px 16px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.fbody ul,.fbody ol{margin:0;padding-left:18px}
+.bbar{display:grid;grid-template-columns:minmax(120px,220px) minmax(0,1fr) 70px;gap:10px;align-items:center;font-size:13.5px;padding:3px 0}
+.bbar .track{height:10px;background:var(--soft);border-radius:5px;overflow:hidden}
+.bbar .track b{display:block;height:100%;background:var(--accent)}
+.bbar .money{text-align:right}
+.issue{display:grid;grid-template-columns:80px minmax(0,1fr);gap:12px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line)}
+.issue:first-child{border-top:0}
+.issue .big{font:800 22px var(--display);color:var(--amber)}
+.scroll{overflow-x:auto}
+table.dt{width:100%;border-collapse:collapse;font-size:13.5px}
+table.dt th{text-align:left;font:600 12px var(--body);color:var(--mute);border-bottom:1px solid var(--line);padding:6px 8px}
+table.dt td{border-bottom:1px solid var(--line);padding:7px 8px;vertical-align:top}
+table.dt tr.best td{background:var(--accent-soft);font-weight:600}
+.callout{background:var(--accent-soft);border-radius:8px;padding:9px 12px;font-size:13.5px;margin-top:8px}
+.callout.warn{background:var(--amber-soft)}
+.casemath{display:flex;flex-direction:column;margin-top:10px}
+.mathrow{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid var(--line);font-size:13.5px}
+.mathrow:first-child{border-top:0}
+#view-case .field input{max-width:220px}
+#view-case ol{margin:6px 0 10px;padding-left:20px}
+@media (max-width:900px){#view-case>.grid2{grid-template-columns:1fr}}
+@media (max-width:640px){.bbar{grid-template-columns:110px minmax(0,1fr) 56px}}
+</style>`);
+rep("/* ============================ tabs + boot ============================ */", `/* ============================ data + business case ============================ */
+const STUDY = ${JSON.stringify(study)};
+${caseModel}
+${business}
+/* ============================ tabs + boot ============================ */`);
+rep(`const VIEWS = ["try", "search", "rules", "saved", "db"];`, `const VIEWS = ["try", "search", "rules", "saved", "db", "data", "case"];`);
 html += "\n</body></html>\n";
-mkdirSync(new URL("public/lab", root), { recursive: true });
-writeFileSync(new URL("public/lab/index.html", root), html);
-console.log("public/lab/index.html (Quote Lab)", (html.length / 1024).toFixed(0), "KB");
+mkdirSync(new URL("public", root), { recursive: true });
+writeFileSync(new URL("public/index.html", root), html);
+console.log("public/index.html (Quote Lab)", (html.length / 1024).toFixed(0), "KB");
