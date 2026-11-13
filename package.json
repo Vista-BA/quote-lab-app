@@ -1,0 +1,22 @@
+{
+  "name": "quote-lab-app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "7-Eleven Quote Lab: prototype on Postgres + pgvector (Neon), deployable to Vercel",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "load": "node scripts/load.mjs",
+    "dev": "node scripts/dev.mjs",
+    "test": "node scripts/test.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "0.10.4"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.2.17"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

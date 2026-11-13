@@ -1,0 +1,31 @@
+// API checks against a throwaway PGlite database: load, search, add, protected delete, drafts.
+import { rmSync } from "node:fs";
+const dir = "./.pgtest"; rmSync(dir, { recursive: true, force: true });
+process.env.DATABASE_URL = "pglite:" + dir;
+const { loadAll } = await import("../lib/load.js"); await loadAll();
+const call = async (name, method, body, url = "/api/" + name) => {
+  const mod = await import(`../api/${name}.js`); let out = {};
+  await mod.default({ method, body, url, headers: {} }, { statusCode: 200, setHeader() {}, end(s) { out = { code: this.statusCode, ...JSON.parse(s) }; } });
+  return out;
+};
+const { readFileSync } = await import("node:fs");
+const rows = JSON.parse(readFileSync(new URL("../data/quotes.json", import.meta.url), "utf8"));
+let fails = 0; const ok = (c, m) => { console.log(c ? "PASS" : "FAIL", m); if (!c) fails++; };
+const h = await call("health", "GET"); ok(h.ok && h.quotes === rows.length, `health: ${h.quotes} rows, pgvector ${h.pgvector}`);
+const slurpee = rows.find((r) => /slurpee/i.test(r.eq));
+const s = await call("search", "POST", { vector: slurpee.vector, words: ["slurpee"], k: 5 });
+ok(s.hits[0].id === slurpee.id, "a quote's own vector ranks itself first (hybrid)");
+const m = await call("search", "POST", { vector: slurpee.vector, words: [], k: 5, mode: "meaning" });
+ok(m.hits[0].id === slurpee.id && m.hits[0].sem > 0.999, "meaning-only search: cosine 1.0 for itself");
+ok((await call("search", "POST", { vector: [1, 2] })).code === 400, "bad vector rejected");
+const a = await call("quotes", "POST", { eq: "Test unit", tr: "call 555-123-4567 test", vector: slurpee.vector, parts: [["x", 1]] });
+ok(a.id?.startsWith("add-"), "add a quote");
+ok((await call("index", "GET")).rows.find((r) => r.id === a.id)?.tr.includes("[phone]"), "phone number scrubbed on add");
+await call("quotes", "DELETE", null, "/api/quotes?id=" + slurpee.id);
+ok((await call("health", "GET")).quotes === rows.length + 1, "ClickUp quotes cannot be deleted");
+await call("quotes", "DELETE", null, "/api/quotes?id=" + a.id);
+ok((await call("health", "GET")).quotes === rows.length, "added quote deleted");
+await call("drafts", "POST", { machine: "Test", total: 10 });
+ok((await call("drafts", "GET")).rows[0]?.machine === "Test", "draft saved and read back");
+rmSync(dir, { recursive: true, force: true });
+console.log(fails ? `${fails} failed` : "all passed"); process.exit(fails ? 1 : 0);
