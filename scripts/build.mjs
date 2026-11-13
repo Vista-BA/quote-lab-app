@@ -84,6 +84,6 @@ rep("Meaning search: a small free word-vector model, ${V.dim} numbers per quote,
     "Vectors: a small free word-vector model, ${V.dim} numbers per quote, stored and ranked in Postgres + pgvector.");
 rep("<title>7-Eleven Quote Lab</title>", `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>7-Eleven Quote Lab</title>`);
 html += "\n</body></html>\n";
-mkdirSync(new URL("public", root), { recursive: true });
-writeFileSync(new URL("public/index.html", root), html);
-console.log("public/index.html", (html.length / 1024).toFixed(0), "KB");
+mkdirSync(new URL("public/lab", root), { recursive: true });
+writeFileSync(new URL("public/lab/index.html", root), html);
+console.log("public/lab/index.html (Quote Lab)", (html.length / 1024).toFixed(0), "KB");

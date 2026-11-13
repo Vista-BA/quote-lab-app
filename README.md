@@ -1,4 +1,9 @@
-# 7-Eleven Quote Lab — on a real vector database
+# 7-Eleven Quote Desk + Quote Lab — on a real vector database
+
+Two pages, one database:
+
+- **`/` Quote Desk (v4):** the full prototype (Overview, Live demo with the five steps and their three views, Search old quotes, What the data says, Business case). Source in `desk/`, 74 tests in `desk/tests/`. Its **Search old quotes** tab is ranked by Postgres through `/api/search`; if the database does not answer it falls back to the same search in the browser and says so.
+- **`/lab` Quote Lab:** the playground (try your own call, add quotes, edit rates, save drafts, see a stored vector).
 
 **Status: prototype.** Same Quote Lab page, but the quotes and their vectors live in **Postgres + pgvector** (Neon), and Postgres does the ranking. Not connected to Yoda, ClickUp or Quo.
 
@@ -36,7 +41,7 @@ Terminal alternative for step 6: `npm install` then `DATABASE_URL="<neon string>
 npm install
 npm run load    # into a local PGlite (Postgres + pgvector in WASM), folder .pgdata
 npm run dev     # http://localhost:3000
-npm test        # 9 API checks on a throwaway database
+npm test        # 74 Quote Desk tests + 9 API checks on a throwaway database
 ```
 Set `DATABASE_URL` to a Neon string to run the same commands against Neon.
 

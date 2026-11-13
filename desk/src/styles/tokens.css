@@ -1,0 +1,26 @@
+/* Design tokens. Every colour, font and shadow in the app comes from here, so a host app only has to map this one file.
+   --amber is for bars and dots; --amber-ink is the same hue dark enough for text (4.5:1 on --amber-soft).
+   --on-accent is the text colour on an accent background. */
+:root{
+  --bg:#eef1f3; --panel:#ffffff; --ink:#17212b; --mute:#5d6b78; --line:#d9e0e5;
+  --accent:#0f6e6a; --accent-soft:#dcefed; --on-accent:#ffffff;
+  --amber:#b86a00; --amber-ink:#8a4f00; --amber-soft:#fbefdc;
+  --red:#b3261e; --red-soft:#f9e3e1; --green:#1d7a45; --green-soft:#e0f2e7; --paper:#fbfaf6;
+  --shadow:0 1px 2px rgba(23,33,43,.06); --lift:0 10px 30px rgba(23,33,43,.2);
+  --display:"Archivo", "Helvetica Neue", Arial, sans-serif; --body:"IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme:light;
+}
+/* Dark follows the device, unless the page is pinned with data-theme. The two blocks below must stay the same. */
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1519; --panel:#172027; --ink:#e6ecef; --mute:#93a2ae; --line:#2a363f;
+  --accent:#4cc2b9; --accent-soft:#16312f; --on-accent:#0f1519;
+  --amber:#f0a94a; --amber-ink:#f0a94a; --amber-soft:#33270f;
+  --red:#f2867d; --red-soft:#3a1d1b; --green:#5fcf8c; --green-soft:#16301f; --paper:#1d272e;
+  --shadow:none; --lift:0 10px 30px rgba(0,0,0,.6); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1519; --panel:#172027; --ink:#e6ecef; --mute:#93a2ae; --line:#2a363f;
+  --accent:#4cc2b9; --accent-soft:#16312f; --on-accent:#0f1519;
+  --amber:#f0a94a; --amber-ink:#f0a94a; --amber-soft:#33270f;
+  --red:#f2867d; --red-soft:#3a1d1b; --green:#5fcf8c; --green-soft:#16301f; --paper:#1d272e;
+  --shadow:none; --lift:0 10px 30px rgba(0,0,0,.6); color-scheme:dark}

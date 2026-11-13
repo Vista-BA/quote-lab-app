@@ -1,0 +1,626 @@
+{
+ "runs": [
+  {
+   "wo": "Demo-01",
+   "equipment": "TurboChef Oven",
+   "city": "Dallas, TX",
+   "store": 34518,
+   "nte": 1000,
+   "paid": true,
+   "description": "Oven not heating, store cannot bake",
+   "calls_checked": 2,
+   "call_types": {
+    "findings": 1,
+    "check-in": 1
+   },
+   "call": {
+    "time": "10:40",
+    "lines": [
+     "Tech: Hey, Mike again at 7-Eleven 34518 on Lemmon. The TurboChef oven isn't heating. I found the magnetron is bad and the high voltage capacitor is shorted, I tested both.",
+     "Dispatcher: Okay, what do you need?",
+     "Tech: It needs a new magnetron and a new high voltage capacitor. Repair is about 3 hours. I've been here 1.5 hours already on the diagnosis.",
+     "Dispatcher: Anything else, fans, filters?",
+     "Tech: No, cooling fan is fine."
+    ]
+   },
+   "how": "tech phone from PPR line (+12145550141)",
+   "family": "High-speed oven",
+   "makes": [
+    "TurboChef"
+   ],
+   "findings": {
+    "problem": "the magnetron is bad and the high voltage capacitor is shorted, I tested both.",
+    "parts": [
+     {
+      "name": "magnetron",
+      "qty": 1,
+      "price_said": null
+     },
+     {
+      "name": "high voltage capacitor",
+      "qty": 1,
+      "price_said": null
+     }
+    ],
+    "labor_hours": 3,
+    "techs": 1,
+    "overtime": false
+   },
+   "matches": [
+    {
+     "wo": "WO-45153",
+     "score": 0.886,
+     "tr": "the TurboChef oven is displaying an F3 – Magnetron Current Low fault. Troubleshooting identified a failed high",
+     "total": 3698
+    },
+    {
+     "wo": "WO-46788",
+     "score": 0.839,
+     "tr": "the microwave section of the TurboChef is not functioning",
+     "total": 1685.86
+    },
+    {
+     "wo": "WO-45131",
+     "score": 0.834,
+     "tr": "the TurboChef Tornado oven is not powering and operating properly due to failed microwave and electrical compo",
+     "total": 1817
+    }
+   ],
+   "new_work": {
+    "is_new": false,
+    "reasons": [],
+    "family_quotes": 23,
+    "best_score": 0.886
+   },
+   "web": null,
+   "draft": {
+    "tr": "the magnetron is bad and the high voltage capacitor is shorted, I tested both",
+    "steps": [
+     "Full inspection of the TurboChef Oven",
+     "Access high-voltage microwave section",
+     "Remove and dispose of the failed magnetron",
+     "Supply and install one new magnetron",
+     "Remove and dispose of the failed high voltage capacitor",
+     "Supply and install one new high voltage capacitor",
+     "Restore power and water supply as needed",
+     "Perform final operational testing",
+     "Clean the work area"
+    ]
+   },
+   "price": {
+    "rate": 129,
+    "tax_pct": 8.25,
+    "incurred": [
+     {
+      "text": "Trip",
+      "amount": 75
+     },
+     {
+      "text": "1.5 hours labor Tech 1",
+      "amount": 193.5
+     }
+    ],
+    "labor": [
+     {
+      "text": "3 hours labor Tech 1",
+      "amount": 387
+     }
+    ],
+    "materials": [
+     {
+      "text": "Magnetron",
+      "amount": 223.45,
+      "price_source": "past quotes: exact, same appliance (e.g. TurboChef NGC-3015 Magnetron Service Kit)"
+     },
+     {
+      "text": "High Voltage Capacitor",
+      "amount": 142.06,
+      "price_source": "past quotes: exact, same appliance (e.g. High-Voltage capacitor)"
+     }
+    ],
+    "fees": [],
+    "incurred_tax": 22.15,
+    "total_incurred": 290.65,
+    "additional_subtotal": 752.51,
+    "additional_tax": 62.08,
+    "grand_total": 1105.24,
+    "over_nte": true
+   },
+   "flags": [
+    "Tax 8.25% is the usual TX rate: confirm the store ZIP rate",
+    "OVER NTE: $1,105.24 > $1,000 -> send to 7-Eleven for approval"
+   ]
+  },
+  {
+   "wo": "Demo-02",
+   "equipment": "Slurpee Machine",
+   "city": "Chicago, IL",
+   "store": 22871,
+   "nte": 1300,
+   "paid": false,
+   "description": "Left barrel not freezing, product liquid",
+   "calls_checked": 8,
+   "call_types": {
+    "findings": 3,
+    "sourcing": 4,
+    "other client": 1
+   },
+   "call": {
+    "time": "15:05",
+    "lines": [
+     "Tech: Hey, this is Dan, I'm at the 7-Eleven on Clark, store 22871, the Slurpee machine. It's an FBD, two barrels, the left barrel is not freezing.",
+     "Dispatcher: Okay, what did you find?",
+     "Tech: I found the expansion valve is stuck, and the beater motor on the left barrel is worn, it's making noise. It needs a new expansion valve and a new beater motor.",
+     "Tech: We have to recover the refrigerant, braze the new valve, pull a vacuum and do a leak test. I'll need a second tech, about 4 hours each.",
+     "Dispatcher: Got it, I'll send the quote."
+    ]
+   },
+   "how": "all Dispatcher 1 calls since assessment ongoing",
+   "family": "Slurpee / frozen beverage",
+   "makes": [
+    "FBD"
+   ],
+   "findings": {
+    "problem": "the expansion valve is stuck, and the beater motor on the left barrel is worn, it's making noise.",
+    "parts": [
+     {
+      "name": "expansion valve",
+      "qty": 1,
+      "price_said": null
+     },
+     {
+      "name": "beater motor",
+      "qty": 1,
+      "price_said": null
+     }
+    ],
+    "labor_hours": 4,
+    "techs": 2,
+    "overtime": false
+   },
+   "matches": [
+    {
+     "wo": "WO-44002",
+     "score": 0.732,
+     "tr": "the existing 2-barrel frozen drink machine requires complete replacement with a client-supplied unit",
+     "total": 2986.94
+    },
+    {
+     "wo": "WO-46533",
+     "score": 0.7,
+     "tr": "the existing 4-barrel frozen drink machine has a major barrel leak. Due to the extent of the internal leak, re",
+     "total": 3225.92
+    },
+    {
+     "wo": "WO-44785",
+     "score": 0.697,
+     "tr": "the existing 4-barrel frozen drink machine has a major refrigerant leak within the evaporator coils. Due to th",
+     "total": 3306.94
+    }
+   ],
+   "new_work": {
+    "is_new": false,
+    "reasons": [],
+    "family_quotes": 47,
+    "best_score": 0.732
+   },
+   "web": null,
+   "draft": {
+    "tr": "the expansion valve is stuck, and the beater motor on the left barrel is worn, it's making noise",
+    "steps": [
+     "Full inspection of the FBD Slurpee Machine",
+     "Shut off the water and CO₂ supplies",
+     "Remove and dispose of the failed expansion valve",
+     "Supply and install one new expansion valve",
+     "Remove and dispose of the failed beater motor",
+     "Supply and install one new beater motor",
+     "Perform leak test on all brazed connections",
+     "Pull a deep vacuum and recharge the system",
+     "Restore power and water supply as needed",
+     "Perform final operational testing",
+     "Clean the work area"
+    ]
+   },
+   "price": {
+    "rate": 129,
+    "tax_pct": 10.25,
+    "incurred": [
+     {
+      "text": "Trip",
+      "amount": 75
+     },
+     {
+      "text": "1 hour labor Tech 1",
+      "amount": 129
+     }
+    ],
+    "labor": [
+     {
+      "text": "4 hours labor Tech 1",
+      "amount": 516
+     },
+     {
+      "text": "4 hours labor Tech 2",
+      "amount": 516
+     }
+    ],
+    "materials": [
+     {
+      "text": "Expansion Valve",
+      "amount": 619.83,
+      "price_source": "past quotes: exact, other appliance (e.g. Manitowoc OEM 000008937 Thermostatic Expansion Valve / TXV)"
+     },
+     {
+      "text": "Beater Motor",
+      "amount": 0,
+      "price_source": "MISSING"
+     }
+    ],
+    "fees": [
+     {
+      "text": "Leak test fee",
+      "amount": 50
+     },
+     {
+      "text": "Recovery tank fee",
+      "amount": 50
+     },
+     {
+      "text": "Vacuum fee",
+      "amount": 50
+     }
+    ],
+    "incurred_tax": 20.91,
+    "total_incurred": 224.91,
+    "additional_subtotal": 1801.83,
+    "additional_tax": 184.69,
+    "grand_total": 2211.43,
+    "over_nte": true
+   },
+   "flags": [
+    "Tax 10.25% is the usual IL rate: confirm the store ZIP rate",
+    "PRICE CHECK: Expansion Valve $619.83 comes from a different appliance ('Manitowoc OEM 000008937 Thermostatic Expansion Valve / TXV')",
+    "PRICE NEEDED: Beater Motor",
+    "OVER NTE: $2,211.43 > $1,300 -> send to 7-Eleven for approval"
+   ]
+  },
+  {
+   "wo": "Demo-05",
+   "equipment": "Ice maker (standalone machine)",
+   "city": "Austin, TX",
+   "store": 35990,
+   "nte": 1000,
+   "paid": true,
+   "description": "Ice machine not making ice",
+   "calls_checked": 1,
+   "call_types": {
+    "findings": 1
+   },
+   "call": {
+    "time": "15:00",
+    "lines": [
+     "Tech: Hi, it's Ana at the 7-Eleven 35990 on Guadalupe. The Hoshizaki KM ice machine is not making ice.",
+     "Tech: I found the float switch is stuck and the inlet water valve is not opening, the coil failed. It needs a new float switch and a new inlet water valve.",
+     "Tech: Float switch is about $95 and the valve $140 from the supplier. About 2 hours."
+    ]
+   },
+   "how": "tech phone from PPR line (+15125550110)",
+   "family": "Ice machine",
+   "makes": [
+    "Hoshizaki"
+   ],
+   "findings": {
+    "problem": "the float switch is stuck and the inlet water valve is not opening, the coil failed.",
+    "parts": [
+     {
+      "name": "float switch",
+      "qty": 1,
+      "price_said": 95
+     },
+     {
+      "name": "inlet water valve",
+      "qty": 1,
+      "price_said": 140
+     }
+    ],
+    "labor_hours": 2,
+    "techs": 1,
+    "overtime": false,
+    "model": "Only the KM series was said. The bot asks the tech for the exact model."
+   },
+   "matches": [
+    {
+     "wo": "WO-39801",
+     "score": 0.698,
+     "tr": "the ice machine needs a preventive maintenance",
+     "total": 1866.01
+    },
+    {
+     "wo": "WO-43325",
+     "score": 0.648,
+     "tr": "the ice machine has restricted and uneven water distribution across the evaporator coil caused by buildup and ",
+     "total": 1658.82
+    },
+    {
+     "wo": "WO-38809",
+     "score": 0.6,
+     "tr": "the ice machine water level sensor has failed, preventing proper water level monitoring and ice production. Pr",
+     "total": 1453.27
+    }
+   ],
+   "new_work": {
+    "is_new": true,
+    "reasons": [
+     "make 'Hoshizaki' never quoted before"
+    ],
+    "family_quotes": 5,
+    "best_score": 0.698
+   },
+   "web": {
+    "text": "Hoshizaki KM-series service manuals: the controller board checks the float switch at the end of the 1-minute water fill and each defrost. A stuck or failed float switch, a failed inlet water valve, or a control board fault can stop ice production. Low water can damage the pump motor seal.",
+    "sources": [
+     {
+      "title": "Hoshizaki KM-320M service manual (hoshizakiamerica.com)",
+      "url": "https://secure.hoshizakiamerica.com/docs/manuals/KM-320M_H_serv.pdf"
+     },
+     {
+      "title": "Hoshizaki KM-1300SWH-E service manual (hoshizakiamerica.com)",
+      "url": "https://secure.hoshizakiamerica.com/docs/manuals/KM-1300SWH-E_serv.pdf"
+     }
+    ]
+   },
+   "draft": {
+    "tr": "the float switch is stuck and the inlet water valve is not opening, the coil failed",
+    "steps": [
+     "Full inspection of the Hoshizaki Ice maker (standalone machine)",
+     "Shut off and lock out electrical supply to the ice machine",
+     "Shut off the water supply and drain the reservoir",
+     "Remove and dispose of the failed float switch",
+     "Supply and install one new float switch",
+     "Remove and dispose of the failed inlet water valve",
+     "Supply and install one new inlet water valve",
+     "Restore power and water supply as needed",
+     "Perform final operational testing",
+     "Clean the work area"
+    ]
+   },
+   "price": {
+    "rate": 129,
+    "tax_pct": 8.25,
+    "incurred": [
+     {
+      "text": "Trip",
+      "amount": 75
+     },
+     {
+      "text": "1 hour labor Tech 1",
+      "amount": 129
+     }
+    ],
+    "labor": [
+     {
+      "text": "2 hours labor Tech 1",
+      "amount": 258
+     }
+    ],
+    "materials": [
+     {
+      "text": "Float Switch",
+      "amount": 95,
+      "price_source": "tech said",
+      "basis": "supplier cost"
+     },
+     {
+      "text": "Inlet Water Valve",
+      "amount": 140,
+      "price_source": "tech said",
+      "basis": "supplier cost"
+     }
+    ],
+    "fees": [],
+    "incurred_tax": 16.83,
+    "total_incurred": 220.83,
+    "additional_subtotal": 493,
+    "additional_tax": 40.67,
+    "grand_total": 754.5,
+    "over_nte": false
+   },
+   "flags": [
+    "NEW WORK: make 'Hoshizaki' never quoted before -> check scope with the tech",
+    "MODEL NEEDED: asked the tech for the data plate -> the manual is a reference until then",
+    "Tax 8.25% is the usual TX rate: confirm the store ZIP rate",
+    "Check: Assessment time not said: incurred uses 1 hour"
+   ],
+   "ask_tech": [
+    "Please send a photo of the data plate, so we have the model and serial number.",
+    "What are the part numbers on the float switch and the inlet water valve?",
+    "Is anything in the way of reaching them?"
+   ]
+  }
+ ],
+ "study": {
+  "wos": 589,
+  "from": "2026-06-08",
+  "to": "2026-11-11",
+  "quotes": 539,
+  "priced": 510,
+  "quoted_total": 1026685,
+  "median_quote": 1272,
+  "repair_quotes": 432,
+  "over_nte": 89,
+  "mismatch": 11,
+  "invoiced_with_cost": 447,
+  "median_margin": 0.376,
+  "loss_jobs": 16,
+  "loss_total": -7098,
+  "make_named": 123,
+  "assignees": [
+   [
+    "Dispatcher A",
+    300
+   ],
+   [
+    "Dispatcher B",
+    70
+   ],
+   [
+    "Dispatcher C",
+    55
+   ],
+   [
+    "Dispatcher D",
+    38
+   ],
+   [
+    "Dispatcher E",
+    31
+   ],
+   [
+    "Dispatcher F",
+    21
+   ]
+  ],
+  "assignee_other": 74,
+  "families": [
+   [
+    "Reach-in cooler / freezer",
+    94
+   ],
+   [
+    "Fountain / soda",
+    92
+   ],
+   [
+    "HVAC",
+    60
+   ],
+   [
+    "Coffee machine",
+    56
+   ],
+   [
+    "Slurpee / frozen beverage",
+    48
+   ],
+   [
+    "Doors / building",
+    36
+   ],
+   [
+    "Plumbing",
+    36
+   ],
+   [
+    "Walk-in / vault",
+    36
+   ],
+   [
+    "Hot food equipment",
+    26
+   ],
+   [
+    "High-speed oven",
+    24
+   ],
+   [
+    "Electrical / lighting",
+    16
+   ],
+   [
+    "Other",
+    9
+   ],
+   [
+    "Ice machine",
+    6
+   ]
+  ],
+  "states": [
+   [
+    "TX",
+    191
+   ],
+   [
+    "IL",
+    185
+   ],
+   [
+    "CA",
+    83
+   ],
+   [
+    "IN",
+    65
+   ],
+   [
+    "MN",
+    24
+   ],
+   [
+    "UT",
+    19
+   ]
+  ],
+  "wait_hours_median": 50,
+  "wait_n": 178,
+  "wait_p75": 97,
+  "eval": {
+   "keyword": {
+    "n": 518,
+    "hit@5_family": 0.952,
+    "top1_family": 0.805,
+    "make_hit@5": 0.771,
+    "make_n": 118
+   },
+   "vector": {
+    "n": 518,
+    "hit@5_family": 0.961,
+    "top1_family": 0.861,
+    "make_hit@5": 0.669,
+    "make_n": 118
+   },
+   "hybrid": {
+    "n": 518,
+    "hit@5_family": 0.965,
+    "top1_family": 0.894,
+    "make_hit@5": 0.746,
+    "make_n": 118
+   },
+   "bot": {
+    "n": 518,
+    "hit@5_family": 0.983,
+    "top1_family": 0.967,
+    "make_hit@5": 0.746,
+    "make_n": 118
+   }
+  },
+  "recheck": {
+   "date": "2026-11-13",
+   "n": 518,
+   "make_n": 118,
+   "methods": {
+    "words": {
+     "family": 496,
+     "make": 88
+    },
+    "meaning": {
+     "family": 495,
+     "make": 79
+    },
+    "both": {
+     "family": 498,
+     "make": 85
+    }
+   },
+   "no_machine": {
+    "family": 436,
+    "make": 81
+   },
+   "copies_hidden": {
+    "family": 499,
+    "make": 80
+   },
+   "shared_wording": 67
+  }
+ }
+}

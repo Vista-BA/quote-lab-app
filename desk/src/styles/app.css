@@ -1,0 +1,366 @@
+/* Component styles. Colours, fonts and shadows come only from tokens.css. Smallest text is 12px.
+   Layout: one working desk. Left = work orders waiting for a quote. Right = the bot's five steps over the draft ticket. */
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 28px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h1{font:800 22px/1.1 var(--display);letter-spacing:-.01em;margin:0}
+.sub{color:var(--mute);font-size:13px}
+.tabs{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:4px}
+.tab{border:0;background:none;color:var(--mute);font:600 14px var(--body);padding:7px 14px;border-radius:7px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--on-accent)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.label{font:600 12px var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+
+/* desk */
+.desk{display:grid;grid-template-columns:270px minmax(0,1fr);gap:16px;align-items:start}
+.inbox{display:flex;flex-direction:column;gap:10px}
+.wo{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.wo[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.wo .top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.wo b{font:700 15px var(--display)}
+.wo .eq{font-weight:600}
+.wo .meta{color:var(--mute);font-size:13px}
+.chip{display:inline-flex;align-items:center;gap:5px;font:600 12px var(--body);padding:2px 8px;border-radius:99px;white-space:nowrap}
+.chip.wait{background:var(--amber-soft);color:var(--amber-ink)}
+.chip.ok{background:var(--green-soft);color:var(--green)}
+.chip.new{background:var(--red-soft);color:var(--red)}
+.note{font-size:12.5px;color:var(--mute);line-height:1.45}
+
+.main{display:flex;flex-direction:column;gap:14px;min-width:0}
+.trigger{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.trigger .t{display:flex;flex-direction:column}
+.trigger .t strong{font:700 16px var(--display)}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 14px var(--body);padding:8px 14px;border-radius:8px;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.step{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:9px;background:var(--panel);border:1px solid var(--line);position:relative;min-width:0}
+.step .n{font:500 12px var(--mono);color:var(--mute)}
+.step .s{font:600 13.5px/1.25 var(--body)}
+.step .who{font-size:12px;color:var(--mute)}
+.step.done .n::after{content:" ✓";color:var(--green)}
+.step.active{border-color:var(--accent);background:var(--accent-soft)}
+.step.pending{opacity:.45}
+.step[aria-selected="true"]{box-shadow:inset 0 -3px 0 var(--accent)}
+
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:14px;align-items:start}
+.pane{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.pane h2{font:700 17px/1.25 var(--display);margin:4px 0 10px;text-wrap:balance}
+.bubble{background:var(--bg);border-radius:10px;padding:8px 11px;font-size:13.5px;margin-bottom:6px}
+.bubble.d{background:var(--accent-soft)}
+.bubble .who{font:600 12px var(--body);color:var(--mute);display:block}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+.facts dt{color:var(--mute)}
+.facts dd{margin:0;font-weight:500}
+.match{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:start;padding:9px 0;border-top:1px solid var(--line);font-size:13.5px}
+.match:first-of-type{border-top:0}
+.pct{font:500 12px var(--mono);background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:2px 6px}
+.wonum{font:500 12.5px var(--mono);color:var(--mute)}
+.money{font:500 13px var(--mono);white-space:nowrap}
+.mathrow{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-top:1px dashed var(--line);font-size:13.5px}
+.mathrow span:last-child{font-family:var(--mono);white-space:nowrap}
+.src{color:var(--mute);font-size:12px}
+.callout{border-radius:8px;padding:9px 11px;font-size:13.5px;margin-top:10px}
+.callout.info{background:var(--accent-soft)}
+.callout.warn{background:var(--red-soft)}
+.callout a{color:var(--accent)}
+.counts{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 12px}
+
+/* ticket */
+.ticket{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:16px 18px;font:400 13px/1.55 var(--mono);position:relative}
+.ticket::before{content:"";position:absolute;left:0;right:0;top:-1px;height:6px;background:radial-gradient(circle at 6px -1px,var(--bg) 4px,transparent 5px) repeat-x;background-size:12px 6px}
+.ticket .head{display:flex;justify-content:space-between;gap:8px;font:600 12px var(--body);color:var(--mute);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em}
+.ticket p{margin:0 0 8px}
+.ticket ul{margin:0 0 10px;padding-left:18px}
+.ticket .sec{font-weight:500;margin-top:10px}
+.li{display:flex;gap:8px}
+.li .d{flex:1;border-bottom:1px dotted var(--mute);transform:translateY(-5px);min-width:10px}
+.li.total{font-weight:500;margin-top:6px}
+.li.grand{font-weight:600;font-size:14px;border-top:1px solid var(--ink);padding-top:6px;margin-top:8px}
+.li .v.missing{color:var(--red)}
+.flags{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.flag{font-size:13px;border-radius:7px;padding:6px 10px;background:var(--amber-soft);color:var(--ink)}
+.flag.bad{background:var(--red-soft)}
+.flag b{color:var(--amber-ink)} .flag.bad b{color:var(--red)}
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.hours{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.hours button{border:0;background:var(--panel);color:var(--ink);width:32px;height:34px;font-size:16px;cursor:pointer}
+.hours span{font:500 13px var(--mono);padding:0 8px}
+.toast{margin-top:10px;font-size:13.5px;background:var(--green-soft);color:var(--ink);border-radius:8px;padding:8px 11px}
+.toast b{color:var(--green)}
+.rule{font-size:12.5px;color:var(--mute);margin-top:8px}
+
+/* data */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi .v{font:800 30px/1.1 var(--display);font-variant-numeric:tabular-nums}
+.kpi .t{font-size:13.5px;color:var(--mute);margin-top:4px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
+.bar{display:grid;grid-template-columns:170px minmax(0,1fr) 38px;gap:10px;align-items:center;font-size:13.5px;padding:3px 0}
+.bar .track{height:12px;background:var(--bg);border-radius:3px;overflow:hidden}
+.bar .fill{height:100%;background:var(--accent);border-radius:3px}
+.bar .num{font:500 12.5px var(--mono);text-align:right}
+.issue{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:10px 0;border-top:1px solid var(--line)}
+.issue:first-of-type{border-top:0}
+.issue .big{font:800 20px var(--display);text-align:right}
+.issue .what{font-weight:600}
+.issue .why{grid-column:1/-1;font-size:13px;color:var(--mute)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+tr.best td{font-weight:600}
+.scroll{overflow-x:auto}
+.searchgrid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px;align-items:start}
+.sform{display:flex;gap:8px;margin:4px 0 10px}
+.sform input{flex:1;min-width:0;font:400 15px var(--body);padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.sform input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.examples{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.ex{border:1px solid var(--line);background:var(--panel);color:var(--ink);font:500 12.5px var(--body);padding:4px 10px;border-radius:99px;cursor:pointer}
+.ex:hover{border-color:var(--accent)}
+.modes{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:8px;padding:3px;margin-bottom:8px}
+.mode{border:0;background:none;color:var(--mute);font:600 13px var(--body);padding:5px 11px;border-radius:6px;cursor:pointer}
+.mode[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent)}
+.results{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column}
+.res{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:4px 12px;padding:11px 0;border-top:1px solid var(--line)}
+.res:first-child{border-top:0}
+.res .rk{font:500 13px var(--mono);color:var(--mute)}
+.res .top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.res .tr{grid-column:2/3;font-size:13.5px}
+.res .sc{grid-column:2/4;display:flex;gap:14px;flex-wrap:wrap}
+.meter{display:flex;align-items:center;gap:6px;font:500 12px var(--mono);color:var(--mute)}
+.meter i{display:block;width:70px;height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
+.meter i b{display:block;height:100%;background:var(--accent)}
+.meter.w i b{background:var(--amber)}
+.chip.fam{background:var(--accent-soft);color:var(--accent)}
+.howlist{margin:0 0 10px;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.minis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}
+.mini{background:var(--bg);border-radius:8px;padding:8px 10px}
+.mini .v{font:800 18px var(--display)}
+.mini .t{font-size:12px;color:var(--mute)}
+footer{margin-top:18px;font-size:12.5px;color:var(--mute)}
+
+@media (max-width:980px){.searchgrid{grid-template-columns:1fr}.desk{grid-template-columns:1fr}.inbox{flex-direction:row;overflow-x:auto;padding-bottom:4px}.wo{min-width:220px}.work{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:1fr}}
+@media (max-width:640px){.steps{grid-template-columns:repeat(5,minmax(96px,1fr));overflow-x:auto}.bar{grid-template-columns:120px minmax(0,1fr) 34px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ===== added in the React build ===== */
+.wrap{padding-bottom:92px}
+.pane,.kpi,.lvl,.trigger,details.fold{box-shadow:var(--shadow)}
+.tabs{max-width:100%;overflow-x:auto}
+.tab{white-space:nowrap;flex:none;padding:7px 11px}
+.sect{margin:24px 0 8px}
+.lead{font-size:15px;margin:0 0 12px;max-width:74ch}
+summary{cursor:pointer}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+button:disabled{opacity:.5;cursor:default}
+th{font:600 12.5px var(--body);color:var(--mute);vertical-align:bottom}
+th.n{font-family:var(--body)}
+
+/* overview */
+.hero{padding:26px 28px;border-top:3px solid var(--accent)}
+.pane .msg{font:800 28px/1.18 var(--display);letter-spacing:-.01em;margin:8px 0 18px;max-width:34ch;text-wrap:balance}
+.herorow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn.big{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;font-size:15px}
+.kpis.three{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:0}
+.kpi .v.unknown{color:var(--mute)}
+.kpi .why{font-size:12.5px;color:var(--mute);margin-top:6px}
+
+/* a number that explains itself on click */
+details.how{margin-top:4px}
+details.how>summary{display:inline-flex;align-items:center;gap:6px;list-style:none;padding:6px 0;color:var(--accent);font:600 12.5px var(--body)}
+details.how>summary::-webkit-details-marker{display:none}
+details.how>summary::before{content:"+";font:500 14px/1 var(--mono)}
+details.how[open]>summary::before{content:"−"}
+details.how>.body{margin-top:2px;font-size:13px;line-height:1.5}
+details.how ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+
+/* a whole section that stays closed until asked for */
+details.fold{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-top:14px}
+details.fold>summary{display:flex;justify-content:space-between;align-items:center;gap:12px;list-style:none;padding:14px 16px;font:700 15px/1.3 var(--display)}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::after{content:"Show";flex:none;font:600 12.5px var(--body);color:var(--accent)}
+details.fold>summary .ft{display:flex;flex-direction:column;gap:3px;min-width:0}
+details.fold+details.fold{margin-top:8px}
+.narrow{max-width:680px}
+details.fold[open]>summary::after{content:"Hide"}
+details.fold>.body{padding:0 16px 16px}
+.worked td:first-child{font-weight:600;white-space:nowrap;vertical-align:top}
+.twocol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 24px;margin-bottom:8px}
+.twocol ul{margin:6px 0 0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:6px}
+
+/* the four questions */
+.levels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.lvl{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.lvl .n{font:500 12px var(--mono);color:var(--mute)}
+.lvl h3{font:700 16px/1.25 var(--display);margin:0}
+.lvl .q{font-size:13.5px;color:var(--mute);margin:0}
+.lvl dl{margin:0;display:grid;gap:4px;font-size:13.5px}
+.lvl dt{font:600 12px var(--body);color:var(--mute);margin-top:4px}
+.lvl dd{margin:0}
+.chip.open{background:var(--bg);color:var(--mute);box-shadow:inset 0 0 0 1px var(--line)}
+.linkbtn{all:unset;cursor:pointer;color:var(--accent);font:600 13px var(--body);margin-top:auto;padding:4px 0;align-self:flex-start}
+.linkbtn:hover{text-decoration:underline}
+.linkbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.levels+.grid2{margin-top:24px}
+
+/* the path and the ask */
+.path{list-style:none;margin:0 0 10px;padding:0;counter-reset:p;display:flex;flex-direction:column;gap:6px}
+.path li{counter-increment:p;display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px}
+.path li::before{content:counter(p);font:500 12px var(--mono);color:var(--mute)}
+.path li.me{background:var(--accent-soft);border-color:var(--accent);font-weight:600}
+.path .who{font:400 12px var(--body);color:var(--mute);text-align:right}
+.path li.me .who{color:var(--ink)}
+.decide{list-style:none;margin:0;padding:0;counter-reset:d}
+.decide li{counter-increment:d;display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+.decide li:first-child{border-top:0;padding-top:2px}
+.decide li::before{content:counter(d);font:500 12px var(--mono);color:var(--mute);padding-top:2px}
+.decide b{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.decide .sug{display:block;color:var(--mute);font-size:13px;margin-top:2px}
+
+/* live demo: questions for the tech, and the manual links */
+.ask{margin:6px 0 8px;padding-left:20px;display:flex;flex-direction:column;gap:3px}
+.ask a{display:inline-block;padding:3px 0}
+
+/* live demo, one work order at a time: its card, then the steps, then the two panes */
+.trigger .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.said{list-style:none;margin:0 0 6px;padding:0;display:flex;flex-direction:column;gap:8px}
+.said li{display:flex;flex-direction:column;gap:1px}
+.said span{color:var(--mute)}
+.plain{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+dd .plain{padding-left:16px}
+details.how .facts{font-size:13px;margin:0}
+details.how .note{margin:6px 0 0}
+
+/* total against the NTE: words first, the bar repeats them */
+.nte{margin-bottom:12px}
+.nte-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.nte-n{font:500 13px var(--mono);font-variant-numeric:tabular-nums}
+.nte-track{position:relative;height:8px;background:var(--bg);border-radius:4px;margin:8px 0 6px;overflow:hidden}
+.nte-fill{display:block;height:100%;background:var(--accent);border-radius:4px}
+.nte-fill.over{background:var(--red)}
+.nte-mark{position:absolute;top:0;bottom:0;width:2px;background:var(--ink)}
+.nte .note{margin:0}
+
+/* what a person has to settle before the quote can go */
+.review{margin-bottom:4px}
+.review .label{margin-bottom:6px}
+.review>.note{margin:0 0 10px}
+.flag{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.flag .tag{margin-right:4px;background:var(--panel)}
+.flag.done{background:var(--green-soft)}
+.flag.done b{color:var(--green)}
+.ack{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:24px;font:600 12.5px var(--body);cursor:pointer}
+.ack input{width:16px;height:16px;margin:0;accent-color:var(--accent)}
+.ack input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ticket details.how{margin:0 0 8px}
+.ticket details.how ul{margin:4px 0 0;padding-left:18px;gap:2px;font-family:var(--mono)}
+.more{margin-top:12px;border-top:1px solid var(--line);padding-top:6px;display:flex;flex-direction:column}
+.more details.how{margin-top:0}
+.next{margin:8px 0 0}
+.hist{margin:0 0 4px}
+.hist+.plain{margin-bottom:6px}
+.linkbtn.inline{margin:0;padding:4px 0;display:inline-block;font-size:inherit}
+.inp.need{margin-top:12px;padding:0;border-top:0}
+.flags details.how{margin-top:0}
+
+/* business case */
+.tag{display:inline-flex;align-items:center;gap:5px;font:600 12px var(--body);padding:1px 7px;border-radius:4px;box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);white-space:nowrap;vertical-align:1px}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mute)}
+.tag.m::before{background:var(--green)}
+.tag.e::before{background:var(--amber)}
+.tag.u::before{background:var(--red)}
+.inp{display:grid;grid-template-columns:minmax(0,1fr) 116px;gap:2px 12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.inp:first-child{border-top:0}
+.inp label{font-weight:600;font-size:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.inp .why{grid-column:1/-1;font-size:12.5px;color:var(--mute)}
+.inp input{width:100%;font:500 15px var(--mono);padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);text-align:right}
+.inp input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.inp input:invalid{border-color:var(--red)}
+.inp input::placeholder{color:var(--mute);font:400 13px var(--body)}
+.bar.wide{grid-template-columns:110px minmax(0,1fr) 76px}
+.bar .fill.neutral{background:var(--mute)}
+.empty{border:1px dashed var(--line);border-radius:8px;padding:12px;font-size:13.5px;color:var(--mute);margin:0 0 10px}
+.casemath{margin-top:10px}
+.casemath .mathrow .src{white-space:normal;font-family:var(--body);display:block}
+.gap{margin-top:14px}
+.moments{list-style:none;margin:8px 0 4px;padding:0;counter-reset:m;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.moments li{counter-increment:m;background:var(--bg);border-radius:8px;padding:10px 12px;font-size:14px}
+.moments li::before{content:counter(m);display:block;font:800 18px var(--display)}
+
+/* demo controls: a floating pill for the presenter */
+/* bottom left: on the live demo that corner is empty, so the pill never covers the quote totals */
+.dc{position:fixed;z-index:20;left:max(16px,env(safe-area-inset-left,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));display:flex;flex-direction:column-reverse;align-items:flex-start;gap:8px}
+.dc-pill{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:99px;background:var(--ink);color:var(--panel);font:600 13px var(--body);padding:10px 16px;cursor:pointer;box-shadow:var(--lift)}
+.dc-menu{width:min(300px,calc(100vw - 32px));background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 8px 8px;box-shadow:var(--lift);display:flex;flex-direction:column;gap:2px}
+.dc-menu .label{padding:0 8px 6px}
+.dc-item{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:1px;padding:8px;border-radius:8px;font-size:14px}
+.dc-item b{font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.dc-item[aria-pressed="true"] b{color:var(--accent)}
+.dc-item span{font-size:12.5px;color:var(--mute)}
+.dc-item:hover{background:var(--accent-soft)}
+.dc-item:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.dc-item.reset{border-top:1px solid var(--line);border-radius:0 0 8px 8px;margin-top:6px;padding-top:12px}
+
+/* below this width the pill would sit on top of the page, so only its icon stays (the words remain for screen readers) */
+@media (max-width:1599px){.dc{left:max(12px,env(safe-area-inset-left,0px));bottom:max(12px,env(safe-area-inset-bottom,0px))}.dc-pill{width:44px;height:44px;padding:0;justify-content:center}.dc-text{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}}
+/* below this width there is no free margin beside the page, so the pill becomes a slim handle on the screen edge:
+   it sits over the page's own padding, never over words */
+@media (max-width:1365px){.dc{left:env(safe-area-inset-left,0px)}.dc-pill{width:30px;border-radius:0 12px 12px 0}.dc-menu{margin-left:12px}}
+@media (max-width:980px){.levels{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.levels,.kpis.three,.twocol,.moments{grid-template-columns:1fr}.pane .msg{font-size:23px}.hero{padding:20px 18px}.worked td:first-child{white-space:normal}.path li{grid-template-columns:18px minmax(0,1fr)}.path .who{grid-column:2;text-align:left}}
+/* hover feedback, colour only */
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]:hover{color:var(--on-accent)}
+.ex:hover{border-color:var(--accent)}
+.mode:hover{color:var(--ink)}
+.mode[aria-pressed="true"]:hover{color:var(--accent)}
+
+/* inside one step of the live demo: its result, how it did it, and the other ways it could be done */
+.faces{display:flex;flex-wrap:wrap;width:fit-content;max-width:100%;margin:0 0 12px}
+.step .got{font:500 12px/1.3 var(--body);color:var(--ink);margin-top:3px}
+.ticket.small{font-size:12.5px}
+.facts.small{font-size:13px;margin:6px 0 0}
+.pane .label+.srcs,.pane .label+.facts.small{margin-top:6px}
+
+/* how it did it: a numbered method, one short point per line, with this work order's own values */
+.method{list-style:none;margin:0 0 14px;padding:0;counter-reset:s;display:flex;flex-direction:column;gap:10px}
+.method>li{counter-increment:s;display:grid;grid-template-columns:18px minmax(0,1fr);gap:8px;font-size:13.5px;line-height:1.5}
+.method>li::before{content:counter(s);font:500 12px/1.7 var(--mono);color:var(--mute)}
+.method p{margin:0}
+.method b{font-weight:600}
+.method .said,.method .plain{margin-top:6px;font-size:13px}
+.method .q{color:var(--mute);font-size:13px;margin-top:4px}
+.srcs{list-style:none;margin:0;padding:0;font-size:13px}
+.srcs li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:5px 0;border-top:1px dashed var(--line)}
+.srcs li:first-child{border-top:0}
+.srcs .k{flex:none;font:600 12px var(--body);color:var(--mute)}
+.srcs .k.part{color:var(--accent)}
+.srcs .k.rule{color:var(--amber-ink)}
+
+/* other ways: one card per way, with what it gives and what it costs. The way used here is marked in words and with a bar. */
+.waysq{font:600 14px/1.4 var(--body);margin:0 0 10px}
+.ways{list-style:none;margin:0 0 10px;padding:0;display:flex;flex-direction:column;gap:8px}
+.way{border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.way.used{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+.way-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.way-top b{font:600 14px/1.35 var(--body)}
+.way-top .tag{flex:none;margin-top:1px}
+.way dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;margin:8px 0 0;font-size:13px;line-height:1.45}
+.way dt{font:600 12px/1.6 var(--body);color:var(--mute);white-space:nowrap}
+.way dd{margin:0}
+.tag.a::before{background:var(--accent)}
+.callout.choice{margin:0 0 12px}
+.measured{margin:0 0 12px}
+.measured caption{caption-side:top;text-align:left;font-size:12.5px;line-height:1.45;color:var(--mute);padding:0 0 6px}
+.measured td .src{display:block;font-family:var(--body)}
+.ways+.note{margin:0 0 4px}
+@media (max-width:640px){.way dl{grid-template-columns:1fr;gap:0}.way dd{margin-bottom:4px}.srcs li{flex-direction:column;gap:0}}
+
+/* one small motion: a new step or a result rises into place. The reduced-motion rule above switches it off. */
+@keyframes rise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.rise{animation:rise .18s ease-out}
+
+@media print{.dc{display:none}}
